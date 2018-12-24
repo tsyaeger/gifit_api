@@ -15,3 +15,26 @@ Gif.create([
 ])
 
 			
+
+Message.create([
+	{ header: 'this is a header', footer: 'footer here', sender_id: 1, receiver_id: 2, sent: false},
+	{ header: 'this is a header2', footer: 'footer here', sender_id: 2, receiver_id: 2, sent: false},
+	{ header: 'this is a header3', footer: 'footer here', sender_id: 2, receiver_id: 1, sent: false},
+	{ header: 'this is a header4', footer: 'footer here', sender_id: 1, receiver_id: 2, sent: false},
+	{ header: 'this is a header5', footer: 'footer here', sender_id: 1, receiver_id: 2, sent: false}
+])
+
+
+
+User.create([
+	{ username: 'u1', email: 'u1@gmail.com', password_digest: '1234'},
+	{ username: 'u2', email: 'u2@gmail.com', password_digest: '1234'},
+	{ username: 'u3', email: 'u3@gmail.com', password_digest: '1234'}
+])
+
+
+Relationship.create([
+	{ user_id: 1, contact_id: 2},
+	{ user_id: 2, contact_id: 1},
+	{ user_id: 2, contact_id: 2}
+])

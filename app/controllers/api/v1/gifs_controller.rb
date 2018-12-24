@@ -6,7 +6,7 @@ class Api::V1::GifsController < ApplicationController
 	end
 
 	def show 
-		@note = Note.find(params[:id])
+		@gif = Gif.find(params[:id])
 		render json: @gif, status: 200
 	end
 
@@ -17,19 +17,19 @@ class Api::V1::GifsController < ApplicationController
 
 	def update
 		@gif = Gif.find(params[:id])
-		@gif.update(note_params)
-		render json: @note, status: 200
+		@gif.update(gif_params)
+		render json: @gif, status: 200
 	end
 
 	def destroy
 		@gif = Gif.find(params[:id])
 		@gif.delete
-		render json: {noteId: @note.id}
+		render json: {gifId: @gif.id}
 	end
 
 
 	private
-	
+
 	def gif_params
 		params.require(:gif).permit(:url)
 	end

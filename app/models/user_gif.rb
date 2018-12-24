@@ -1,0 +1,2 @@
+class UserGif < ApplicationRecord
+end

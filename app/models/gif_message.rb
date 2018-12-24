@@ -1,0 +1,2 @@
+class GifMessage < ApplicationRecord
+end
