@@ -33,8 +33,4 @@ class Api::V1::GifsController < ApplicationController
 	def gif_params
 		params.require(:gif).permit(:url)
 	end
-
-
-
-
 end
