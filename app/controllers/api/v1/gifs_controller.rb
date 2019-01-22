@@ -10,11 +10,11 @@ class Api::V1::GifsController < ApplicationController
 		render json: {status: 'SUCCESS', message: "gif loaded", data: @gif}, status: :ok
 	end
 
-
 	def create
 		gifs = params.require(:gifs)
 		savedGifs = []
 		# binding.pry
+		# FIND OR CREATE BY
 		gifs.each do |gif|
 			@gif = Gif.new(gif.permit(:url))
 			if @gif.save
@@ -37,7 +37,8 @@ class Api::V1::GifsController < ApplicationController
 
 	def destroy
 		@gif = Gif.find(params[:id])
-		if @gif.delete
+			# binding.pry
+		if @gif.destroy
 			render json: {status: 'SUCCESS', message: "gif deleted", data: @gif}, status: :ok
 		else
 			render json: {status: 'ERROR', message: "unprocessable_entity", data: @gif.errors}, status: :unprocessable_entity
