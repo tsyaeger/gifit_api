@@ -3,11 +3,10 @@ Rails.application.routes.draw do
 
 	namespace :api do
 	     namespace :v1 do
-	             resources :gifs
-	             resources :messages
-	             resources :relationships
-	             resources :users
+             resources :gifs
+             resources :messages
+             resources :relationships
+             resources :users
 	     end
 	end
-
 end

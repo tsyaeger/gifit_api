@@ -1,6 +1,10 @@
 class Api::V1::GifsController < ApplicationController
+	# RESTRICT ACTIONS TO CURRENT AUTHENTICATED USER 
+
+	# before_action :set_gif, only: [:show, :update, :delete]
 
 	def index
+		# RESTRICT TO CURRENT USER
 		@gifs = Gif.all
 		render json: {status: 'SUCCESS', message: "gifs loaded", data: @gifs}, status: :ok
 	end
@@ -11,11 +15,12 @@ class Api::V1::GifsController < ApplicationController
 	end
 
 	def create
+		# USE STONG PARAMS
 		gifs = params.require(:gifs)
 		savedGifs = []
-		# binding.pry
-		# FIND OR CREATE BY
 		gifs.each do |gif|
+
+			# FIND OR CREATE BY
 			@gif = Gif.new(gif.permit(:url))
 			if @gif.save
 				savedGifs.push(@gif)
@@ -37,7 +42,6 @@ class Api::V1::GifsController < ApplicationController
 
 	def destroy
 		@gif = Gif.find(params[:id])
-			# binding.pry
 		if @gif.destroy
 			render json: {status: 'SUCCESS', message: "gif deleted", data: @gif}, status: :ok
 		else
@@ -47,6 +51,10 @@ class Api::V1::GifsController < ApplicationController
 
 
 	private
+
+	# def set_gif
+	# 	@gif = Gif.find_by(id: params[:id])
+	# end
 
 	def gif_params
 		params.require(:gif).permit(:url)
