@@ -1,9 +1,10 @@
 class Message < ApplicationRecord
 	has_many :gif_messages 
 	has_many :gifs, through: :gif_messages
-	# belongs_to :sender, :class_name => "User"
-	# belongs_to :receiver, :class_name => "User"
+	belongs_to :sender, :class_name => "User"
+	belongs_to :receiver, :class_name => "User"
 
+	# Before Sent
 	# validates :gifs, :presence => true
 
 	accepts_nested_attributes_for :gifs

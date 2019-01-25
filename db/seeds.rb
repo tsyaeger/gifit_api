@@ -27,9 +27,9 @@ Message.create([
 
 
 User.create([
-	{ username: 'u1', email: 'u1@gmail.com', password_digest: '1234'},
-	{ username: 'u2', email: 'u2@gmail.com', password_digest: '1234'},
-	{ username: 'u3', email: 'u3@gmail.com', password_digest: '1234'}
+	{ username: 'u1', email: 'u1@gmail.com', password: '1234'},
+	{ username: 'u2', email: 'u2@gmail.com', password: '1234'},
+	{ username: 'u3', email: 'u3@gmail.com', password: '1234'}
 ])
 
 
