@@ -5,7 +5,8 @@ class Api::V1::GifsController < ApplicationController
 
 	def index
 		# RESTRICT TO CURRENT USER
-		@gifs = Gif.all
+		@gifs = Gif.order(:created_at)
+		# binding.pry
 		render json: {status: 'SUCCESS', message: "gifs loaded", data: @gifs}, status: :ok
 	end
 
@@ -15,7 +16,7 @@ class Api::V1::GifsController < ApplicationController
 	end
 
 	def create
-		# USE STONG PARAMS
+		# HOW TO USE PRIVAT STONG PARAMS?
 		gifs = params.require(:gifs)
 		savedGifs = []
 		gifs.each do |gif|
@@ -55,6 +56,7 @@ class Api::V1::GifsController < ApplicationController
 	# def set_gif
 	# 	@gif = Gif.find_by(id: params[:id])
 	# end
+
 
 	def gif_params
 		params.require(:gif).permit(:url)
