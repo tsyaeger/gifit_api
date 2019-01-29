@@ -7,6 +7,10 @@ Rails.application.routes.draw do
              resources :messages
              resources :relationships
              resources :users
+
+             post '/login' => 'sessions#create'
 	     end
 	end
 end
+
+
