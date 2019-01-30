@@ -1,6 +1,6 @@
 class Api::V1::GifsController < ApplicationController
-	# RESTRICT ACTIONS TO CURRENT AUTHENTICATED USER 
-	# before_action :set_gif, only: [:show, :update, :delete]
+  # skip_before_action :authenticate, only: [:create]
+
 
 	def index
 		@gifs = current_user.gifs.order(:created_at)
@@ -27,17 +27,9 @@ class Api::V1::GifsController < ApplicationController
 				render json: {status: 'ERROR', message: "unprocessable_entity", data: @gif.errors}, status: :unprocessable_entity
 			end
 		end
+		# binding.pry
 		render json: {status: 'SUCCESS', message: "gifs created", data: savedGifs}, status: :ok
 	end
-
-	# def update
-	# 	@gif = Gif.find(params[:id])
-	# 	if @gif.update_attributes(gif_params)
-	# 		render json: {status: 'SUCCESS', message: "gif updated", data: @gif}, status: :ok
-	# 	else
-	# 		render json: {status: 'ERROR', message: "unprocessable_entity", data: @gif.errors}, status: :unprocessable_entity
-	# 	end
-	# end
 
 	def destroy
 		@gif = Gif.find(params[:id])
