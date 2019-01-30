@@ -18,19 +18,18 @@ class User < ApplicationRecord
 		def by_email_or_username(email:, username:)
 	      User.where('email = ? OR username = ?', email, username).first
 	    end
+
+		# def potential_contacts 
+		# 	potential = []
+		# 	User.all.each do |user| 
+		# 		if self.contacts.exclude?(user)
+		# 			potential.push(user)
+		# 		end
+		# 	end
+		# 	potential
+		# end
 	end
 
-    # by_email_or_username(email: 'test@email.com', username: 'test')
-    # ruby method with keyword arguments
 
-	# def potential_contacts 
-	# 	potential = []
-	# 	User.all.each do |user| 
-	# 		if self.contacts.exclude?(user)
-	# 			potential.push(user)
-	# 		end
-	# 	end
-	# 	potential
-	# end
 end
 
