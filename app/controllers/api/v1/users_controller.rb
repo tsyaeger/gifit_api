@@ -1,57 +1,43 @@
-class Api::V1::UsersController < ApplicationController
-	skip_before_action :authenticate, only: [:create]
+require 'auth'
 
-	def index 
-		@users = User.all
-		render json: @users, status: 200
-	end
+module Api
+	module V1
+		class UsersController < ApplicationController
+			skip_before_action :authenticate, only: [:create]
 
-	def show
-		@user = User.find(params[:id])
-		render json: @user, status: 200
-	end
+			def index 
+				@users = User.all
+				render json: @users, status: 200
+			end
 
-	def create 
-	    @user = User.new(user_params)
-	    if @user.save 
-		    render json: @user, status: 200
+			def show
+				@user = User.find(params[:id])
+				render json: @user, status: 200
+			end
+
+			def create 
+				binding.pry
+			    @user = User.new(user_params)
+			    if @user.save 
+				    render json: @user, status: 200
+				end
+		 	end  
+
+			def destroy
+				@user = User.find(params[:id])
+				@user.delete
+				render json: {userId: @user.id}
+			end
+
+
+
+		 	private
+
+			def user_params
+				params.require(:user).permit(:username, :password, :email)
+			end
+
+			
 		end
-	    #   session[:user_id] = @user.id 
-	    #   redirect_to @user
-	    # else 
-	    # 	render :new
-	    # end
- 	end  
-
-
-
-
-	# def gifs_attributes=(gifs_attributes)
-	# 	gifs_attributes.each do |gif_attributes| 
-	# 		self.gifs.build(gif_attributes)
-	# 	end
-	# end
-
-
-	def update
-		# @user = User.find(params[:id])
-		# @user.update(message_params)
-		# render json: @user, status: 200
 	end
-
-	def destroy
-		@user = User.find(params[:id])
-		@user.delete
-		render json: {userId: @user.id}
-	end
-
-
-
- 	private
-
-	def user_params
-		params.require(:user).permit(:username, :password, :email)
-	end
-
-	
 end
