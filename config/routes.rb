@@ -8,7 +8,9 @@ Rails.application.routes.draw do
              resources :relationships
              resources :users
 
+             post '/signup' => 'users#create'
              post '/login' => 'sessions#create'
+             post '/logout' => 'sessions#destroy'
 	     end
 	end
 end
