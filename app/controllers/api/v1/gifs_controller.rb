@@ -28,7 +28,7 @@ class Api::V1::GifsController < ApplicationController
 				render json: {status: 'ERROR', message: "unprocessable_entity", data: @gif.errors}, status: :unprocessable_entity
 			end
 		end
-		binding.pry
+		# binding.pry
 		render json: {status: 'SUCCESS', message: "gifs created", data: savedGifs}, status: :ok
 	end
 

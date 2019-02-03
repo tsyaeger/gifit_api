@@ -5,7 +5,9 @@ module Api
 
 			def index
 				@messages = Message.all
-				render json: {status: 'SUCCESS', message: "messages loaded", data: @messages}, status: :ok
+				# @messages = current_user.sent_messages
+				# render json: {status: 'SUCCESS', message: "messages loaded", data: @messages}, status: :ok
+				render json: @messages, status: 200
 			end
 
 			def show 
@@ -14,10 +16,12 @@ module Api
 			end
 
 			def create
+				# binding.pry
 				@message = Message.create(message_params)
 				if gif_ids = params[:gif_ids]
 					add_gifs(gif_ids)
 				end
+				# binding.pry
 				render json: @message, status: 200
 			end
 

@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Gif.destroy_all
+# Message.destroy_all
+# User.destroy_all
+# Relationship.destroy_all
 
 Gif.create([
 	{ url: "https://media1.giphy.com/media/xieuDEXX78OYw/giphy.gif?cid=e1bb72ff5b721ced653062486f766c3b"},

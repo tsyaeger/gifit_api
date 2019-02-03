@@ -1,6 +1,7 @@
 require 'auth'
 
 class ApplicationController < ActionController::API
+    include ::ActionController::Serialization
     before_action :authenticate
     attr_accessor :current_user
 

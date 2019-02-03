@@ -7,8 +7,8 @@ module Api
 
 			def index 
 				@users = User.all
-				render json: {status: 'SUCCESS', message: "users loaded", data: @users}, status: :ok
-
+				# render json: {status: 'SUCCESS', message: "users loaded", data: @users}, status: :ok
+				render json: @users
 			end
 
 			def show
@@ -17,7 +17,7 @@ module Api
 			end
 
 			def create 
-				binding.pry
+				# binding.pry
 			    @user = User.new(user_params)
 			    if @user.save 
 				    render json: @user, status: 200

@@ -21,6 +21,12 @@ gem 'bcrypt', '~> 3.1.7'
 # token based auth
 gem 'jwt' 
 
+
+
+gem 'active_model_serializers'
+
+
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -49,9 +55,12 @@ end
 
 
 group :test do
+  gem 'launchy'
   gem 'factory_bot'
   gem 'rails-controller-testing' # If you are using Rails 5.x
   gem 'shoulda-matchers', '4.0.0.rc1'
+    # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '~> 3.12'
 end
 
 
