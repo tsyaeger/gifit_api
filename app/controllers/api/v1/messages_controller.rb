@@ -5,7 +5,7 @@ module Api
 
 			def index
 				@messages = Message.all
-				render json: @messages, status: 200
+				render json: {status: 'SUCCESS', message: "messages loaded", data: @messages}, status: :ok
 			end
 
 			def show 
