@@ -8,7 +8,7 @@ module Api
 			def index 
 				@users = User.all
 				# render json: {status: 'SUCCESS', message: "users loaded", data: @users}, status: :ok
-				render json: @users
+				render json: @users, status: 200
 			end
 
 			def show

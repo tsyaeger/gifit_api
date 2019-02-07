@@ -1,59 +1,43 @@
 module Api
 	module V1
 		class MessagesController < ApplicationController
-			# before_action :set_gif, only: [:show, :update, :delete]
+			before_action :set_message, only: [:show, :update, :destroy]
 
 			def index
 				@messages = Message.all
-				# @messages = current_user.sent_messages
-				# render json: {status: 'SUCCESS', message: "messages loaded", data: @messages}, status: :ok
-				render json: @messages, status: 200
+				# @messages = current_user.messages
+				json_response(@messages)
 			end
 
 			def show 
-				@message = Message.find(params[:id])
-				render json: @message, status: 200
+				# binding.pry
+				json_response(@message)
 			end
 
 			def create
-				# binding.pry
-				@message = Message.create(message_params)
-				if gif_ids = params[:gif_ids]
-					add_gifs(gif_ids)
-				end
-				# binding.pry
-				render json: @message, status: 200
+				@message = Message.create!(message_params.merge({ sender_id: current_user.id }))
+				@message.gif_ids = message_params[:gif_ids]
+
+				json_response(@message)
 			end
 
 			def update
-				@message = Message.find(params[:id])
-				if gif_ids = params[:gif_ids]
-					add_gifs(gif_ids)
-				end
-				@message.update(message_params)
-				render json: @message, status: 200
+				@message.update!(message_params)
+				@message.gif_ids = message_params[:gif_ids]
+
+				json_response(@message)
 			end
 
 			def destroy
-				@message = Message.find(params[:id])
-				@message.delete
-				render json: {messageId: @message.id}
+				@message.destroy
+				# binding.pry
+				empty_response
 			end
-
-			# Does this belong in controller?
-			def add_gifs(gif_id_array)
-				gif_id_array.each do |id|
-					gif = Gif.find_by(id: id)
-					@message.gifs << gif 
-					# binding.pry
-				end
-			end
-
 
 			private
 
 			def set_message
-				@message = Message.find_by(id: params[:id])
+				@message = Message.find(params[:id])
 			end
 
 			def message_params

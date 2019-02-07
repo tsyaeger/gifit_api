@@ -9,9 +9,6 @@ class Message < ApplicationRecord
 
 	accepts_nested_attributes_for :gifs
 
-	# def user_messages
- #    	Message.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
-	# end
 
 	scope :unsent, -> { where('sent = ?',false) }
 	scope :sent, -> { where('sent = ?',true) }

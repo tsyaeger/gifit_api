@@ -3,6 +3,7 @@ class Api::V1::RelationshipsController < ApplicationController
 	def index
 		# binding.pry
 		@relationships = Relationship.all
+		# @relationships = current_user.contacts
 		# render json: {status: 'SUCCESS', message: "relationships loaded", data: @relationships}, status: :ok
 		render json: @relationships, status: 200
 	end
@@ -16,22 +17,22 @@ class Api::V1::RelationshipsController < ApplicationController
 	def create
 		# HOW TO USE PRIVAT STONG PARAMS?
 		# binding.pry
-		relationship_params = params.require(:relationship_params)
-		savedRelationships = []
+		@savedRelationships = []
+		relationships = params[:relationships]
 		relationships.each do |relationship|
-
 			# FIND OR CREATE BY
-			@relationship = Relationship.new(relationship.permit(:url))
+			# binding.pry
+			@relationship = Relationship.new(:user_id => current_user.id, :contact_id => relationship[:id])
 			if @relationship.save
-				savedRelationships.push(@relationship)
+				@savedRelationships.push(@relationship)
 				current_user.relationships.push(@relationship)
+				puts "saved"
 			else
 				render json: {status: 'ERROR', message: "unprocessable_entity", data: @relationship.errors}, status: :unprocessable_entity
 			end
 		end
-		# binding.pry
-		render json: @relationships, status: 200
-		# render json: {status: 'SUCCESS', message: "relationships created", data: savedRelationships}, status: :ok
+		binding.pry
+		render json: @savedRelationships, status: 200
 	end
 
 
