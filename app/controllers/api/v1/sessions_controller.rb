@@ -7,13 +7,15 @@ module Api
 
           def create
             # binding.pry
-            user = User.by_email_or_username(
+            @user = User.by_email_or_username(
                 email: auth_params[:email],
                 username: auth_params[:username]
             )
-            if user.present? && user.authenticate(auth_params[:password])
-                jwt = Auth.issue({email: user.email}, Time.now + 1.year)
+            if @user.present? && @user.authenticate(auth_params[:password])
+                jwt = Auth.issue({email: @user.email}, Time.now + 1.year)
                 render json: {
+                    username: @user.username,
+                    userID: @user.id,
                     success: true,
                     token: jwt
                 }, status: :created
