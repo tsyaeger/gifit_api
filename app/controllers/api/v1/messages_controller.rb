@@ -5,7 +5,7 @@ module Api
 
 			def index
 				@messages = Message.all
-				# @messages = current_user.messages
+				# @messages = current_user.sent_messages + current_user.received_messages
 				json_response(@messages)
 			end
 
@@ -15,6 +15,7 @@ module Api
 			end
 
 			def create
+				# binding.pry
 				@message = Message.create!(message_params.merge({ sender_id: current_user.id }))
 				@message.gif_ids = message_params[:gif_ids]
 
@@ -23,7 +24,9 @@ module Api
 
 			def update
 				@message.update!(message_params)
-				@message.gif_ids = message_params[:gif_ids]
+				binding.pry
+				# @message.gif_ids = message_params[:gif_ids]
+				# binding.pry
 
 				json_response(@message)
 			end
