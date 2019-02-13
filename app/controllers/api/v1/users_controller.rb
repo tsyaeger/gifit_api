@@ -20,7 +20,18 @@ module Api
 				# binding.pry
 			    @user = User.new(user_params)
 			    if @user.save 
-				    render json: @user, status: 200
+					jwt = Auth.issue({email: @user.email}, Time.now + 1.year)
+	                render json: {
+	                    username: @user.username,
+	                    userID: @user.id,
+	                    success: true,
+	                    token: jwt
+	                }, status: :created
+	            else
+					render json: {
+					  success: false,
+					  error: 'Invalid Credentials'
+					}, status: :unauthorized
 				end
 		 	end  
 

@@ -4,8 +4,8 @@ module Api
 			before_action :set_message, only: [:show, :update, :destroy]
 
 			def index
-				@messages = Message.all
-				# @messages = current_user.sent_messages + current_user.received_messages
+				# @messages = Message.all
+				@messages = current_user.sent_messages + current_user.received_messages
 				json_response(@messages)
 			end
 
