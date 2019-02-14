@@ -10,12 +10,10 @@ module Api
 			end
 
 			def show 
-				# binding.pry
 				json_response(@message)
 			end
 
 			def create
-				# binding.pry
 				@message = Message.create!(message_params.merge({ sender_id: current_user.id }))
 				@message.gif_ids = message_params[:gif_ids]
 
@@ -24,16 +22,11 @@ module Api
 
 			def update
 				@message.update!(message_params)
-				binding.pry
-				# @message.gif_ids = message_params[:gif_ids]
-				# binding.pry
-
 				json_response(@message)
 			end
 
 			def destroy
 				@message.destroy
-				# binding.pry
 				empty_response
 			end
 

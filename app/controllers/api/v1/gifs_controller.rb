@@ -1,6 +1,4 @@
 class Api::V1::GifsController < ApplicationController
-  # skip_before_action :authenticate, only: [:create]
-
 
 	def index
 		@gifs = current_user.gifs.order(:created_at)
@@ -13,8 +11,7 @@ class Api::V1::GifsController < ApplicationController
 	end
 
 	def create
-		# HOW TO USE PRIVAT STONG PARAMS?
-		# binding.pry
+		# HOW TO USE PRIVATE STONG PARAMS?
 		gifs = params.require(:gifs)
 		savedGifs = []
 		gifs.each do |gif|
@@ -28,7 +25,6 @@ class Api::V1::GifsController < ApplicationController
 				render json: {status: 'ERROR', message: "unprocessable_entity", data: @gif.errors}, status: :unprocessable_entity
 			end
 		end
-		# binding.pry
 		render json: {status: 'SUCCESS', message: "gifs created", data: savedGifs}, status: :ok
 	end
 

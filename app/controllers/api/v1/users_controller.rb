@@ -7,7 +7,6 @@ module Api
 
 			def index 
 				@users = User.all
-				# render json: {status: 'SUCCESS', message: "users loaded", data: @users}, status: :ok
 				render json: @users, status: 200
 			end
 
@@ -17,7 +16,6 @@ module Api
 			end
 
 			def create 
-				# binding.pry
 			    @user = User.new(user_params)
 			    if @user.save 
 					jwt = Auth.issue({email: @user.email}, Time.now + 1.year)
