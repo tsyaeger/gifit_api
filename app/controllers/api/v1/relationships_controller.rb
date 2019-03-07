@@ -1,10 +1,15 @@
 class Api::V1::RelationshipsController < ApplicationController
 
 	def index
-		# @relationships = Relationship.all
 		@relationships = current_user.contacts
-		json_response(@relationships)
+		json_response(@relationships, @potential_contacts)
 	end
+
+	def potential_relationships
+		@potential_contacts = current_user.potential_contacts
+		json_response(@potential_contacts)
+	end
+
 
 	def show 
 		@relationship = Relationship.find(params[:id])
@@ -12,21 +17,17 @@ class Api::V1::RelationshipsController < ApplicationController
 	end
 
 	def create
-		# HOW TO USE PRIVAT STONG PARAMS?
 		@savedRelationships = []
 		relationships = params[:relationships]
-		relationships.each do |relationship|
-			# FIND OR CREATE BY
-			@relationship = Relationship.new(:user_id => current_user.id, :contact_id => relationship[:id])
-			if @relationship.save
-				@savedRelationships.push(@relationship)
-				current_user.relationships.push(@relationship)
-			else
-				render json: {status: 'ERROR', message: "unprocessable_entity", data: @relationship.errors}, status: :unprocessable_entity
+		relationships.each do |contact|
+			relationship = Relationship.find_by(:user_id => current_user.id, :contact_id => contact[:contact_id]) || Relationship.new(:user_id => current_user.id, :contact_id => contact[:contact_id])
+			if relationship.save
+				@savedRelationships.push(relationship)
+				current_user.relationships.push(relationship)
 			end
 		end
 		@new_contacts = @savedRelationships.map {|r| r.contact_id}
-		json_response(@new_contacts)
+		json_response(@new_contacts) || empty_response
 	end
 
 
