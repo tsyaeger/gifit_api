@@ -4,13 +4,18 @@ module Api
 			before_action :set_message, only: [:show, :update, :destroy]
 
 			def index
-				# @messages = Message.all
 				@messages = current_user.sent_messages + current_user.received_messages
+				# @messages = current_user.user_messages
 				json_response(@messages)
 			end
 
 			def show 
-				json_response(@message)
+				# restrict message to user and, if status is sent, the recipient
+				if current_user.id == @message.sender_id || (current_user == @message.receiver_id && @message.sent)
+					json_response(@message)
+				else 
+					empty_response
+				end
 			end
 
 			def create
