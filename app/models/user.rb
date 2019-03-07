@@ -15,7 +15,7 @@ class User < ApplicationRecord
 	has_many :received_messages, :class_name => "Message",  :foreign_key => "receiver_id"
 
 	def user_messages
-    	Message.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+    	Message.where("user_id = ? OR contact_id = ?", self.id, self.id)
 	end
 	
 	def potential_contacts 
@@ -32,7 +32,6 @@ class User < ApplicationRecord
 		def by_email_or_username(email:, username:)
 	      User.where('email = ? OR username = ?', email, username).first
 	    end
-
 	end
 
 
