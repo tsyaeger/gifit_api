@@ -1,7 +1,6 @@
 module ExceptionHandler
 	extend ActiveSupport::Concern
 
-
 	included do
 		rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError do |e|
 			json_response({ error: "not found" }, :not_found)
