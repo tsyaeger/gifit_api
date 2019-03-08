@@ -21,8 +21,10 @@ class User < ApplicationRecord
 	def potential_contacts 
 		potential = []
 		User.all.each do |user| 
-			if self.contacts.exclude?(user)
-				potential.push(user)
+			if user != self
+				if self.contacts.exclude?(user)
+					potential.push(user)
+				end
 			end
 		end
 		potential
