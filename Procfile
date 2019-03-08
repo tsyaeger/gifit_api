@@ -1,1 +1,1 @@
-web bin/rails server -p $PORT -3 $RAILS_ENV
+web bin/rails server -p $PORT
