@@ -35,6 +35,10 @@ class ApplicationController < ActionController::API
       end
     end
 
+    def fallback_index_html
+      render :file => 'public/index.html'
+    end
+
     private
       
       def auth_header
