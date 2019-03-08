@@ -17,6 +17,7 @@ class Api::V1::RelationshipsController < ApplicationController
 	end
 
 	def create
+		binding.pry
 		@saved_contacts = []
 		relationships = params[:relationships]
 		relationships.each do |contactId|
@@ -27,7 +28,6 @@ class Api::V1::RelationshipsController < ApplicationController
 				current_user.relationships.push(relationship)
 			end
 		end
-		# binding.pry
 		# @new_contacts = @savedRelationships.map {|r| r.contact_id}
 		json_response(@saved_contacts) || empty_response
 	end
