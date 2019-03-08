@@ -17,23 +17,24 @@ class Api::V1::RelationshipsController < ApplicationController
 	end
 
 	def create
-		@savedRelationships = []
+		@saved_contacts = []
 		relationships = params[:relationships]
-		relationships.each do |contact|
-			relationship = Relationship.find_by(:user_id => current_user.id, :contact_id => contact[:contact_id]) || Relationship.new(:user_id => current_user.id, :contact_id => contact[:contact_id])
+		relationships.each do |contactId|
+			contact = User.find_by(id: contactId)
+			relationship = Relationship.find_by(:user_id => current_user.id, :contact_id => contact.id) || Relationship.new(:user_id => current_user.id, :contact_id => contact.id)
 			if relationship.save
-				@savedRelationships.push(relationship)
+				@saved_contacts.push(contact)
 				current_user.relationships.push(relationship)
 			end
 		end
-		@new_contacts = @savedRelationships.map {|r| r.contact_id}
-		json_response(@new_contacts) || empty_response
+		# binding.pry
+		# @new_contacts = @savedRelationships.map {|r| r.contact_id}
+		json_response(@saved_contacts) || empty_response
 	end
 
 
 
 	def destroy
-		# binding.pry
 		@relationship = Relationship.find_by(user_id: current_user.id, contact_id: params[:contactId])
 		@relationship.destroy
 		empty_response
