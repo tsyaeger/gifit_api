@@ -11,12 +11,9 @@ class Api::V1::GifsController < ApplicationController
 	end
 
 	def create
-		# HOW TO USE PRIVATE STONG PARAMS?
 		gifs = params.require(:gifs)
 		savedGifs = []
 		gifs.each do |gif|
-
-			# FIND OR CREATE BY
 			@gif = Gif.new(gif.permit(:url))
 			if @gif.save
 				savedGifs.push(@gif)
@@ -44,7 +41,7 @@ class Api::V1::GifsController < ApplicationController
 	private
 
 	# def set_gif
-	# 	@gif = Gif.find_by(id: params[:id])
+	# 	@gif = Gif.find_by(url: params[:url])
 	# end
 
 
