@@ -7,10 +7,14 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:3000', 'https://gifed.herokuapp.com'
+    origins 'localhost:3000', 'https://gifed.herokuapp.com', 'http://gifed.herokuapp.com'
 
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
+
+
+
+# :headers => 'Accept', 'Content-Type'
