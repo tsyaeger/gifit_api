@@ -1,24 +1,17 @@
-# README
+# GIFiT
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The app allows users to compose and send messages with gifs that they gather from keyword searches. Powered by Giphy.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+Clone the repo, run rails db:migrate, and run rails s in your command line. 
 
-* System dependencies
 
-* Configuration
+## Contributing
 
-* Database creation
+Bug reports and pull requests are welcome at https://github.com/tsyaeger/gifit_api.
 
-* Database initialization
 
-* How to run the test suite
+## License
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The app is open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
