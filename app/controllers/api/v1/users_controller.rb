@@ -5,7 +5,7 @@ module Api
 		class UsersController < ApplicationController
 			skip_before_action :authenticate, only: [:create]
 
-			def index 
+			def index
 				@users = User.all
 				render json: @users, status: 200
 			end
