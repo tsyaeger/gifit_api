@@ -5,6 +5,6 @@ class Gif < ApplicationRecord
 	has_many :user_gifs, dependent: :destroy
 	has_many :users, through: :user_gifs
 
-	# validates :url, format: { with: /(http.*)(.*giphy.gif.cid=*)/} 
-	# validates :url, uniqueness: true #ensure that user still gets gif added rather than error
+	validates :url, format: { with: /giphy.gif/} 
+	validates :url, uniqueness: true
 end
