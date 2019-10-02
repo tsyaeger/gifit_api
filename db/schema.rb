@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_033224) do
+ActiveRecord::Schema.define(version: 2019_10_02_041522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_033224) do
   create_table "gif_messages", force: :cascade do |t|
     t.integer "gif_id"
     t.integer "message_id"
+    t.integer "position"
     t.index ["gif_id"], name: "index_gif_messages_on_gif_id"
     t.index ["message_id"], name: "index_gif_messages_on_message_id"
   end

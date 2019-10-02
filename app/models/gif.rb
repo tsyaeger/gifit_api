@@ -6,5 +6,4 @@ class Gif < ApplicationRecord
 	has_many :users, through: :user_gifs
 
 	validates :url, format: { with: /giphy.gif/} 
-	validates :url, uniqueness: true
 end

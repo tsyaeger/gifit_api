@@ -1,4 +1,4 @@
-require 'rails_helper'
+   marequire 'rails_helper'
 
 RSpec.describe Api::V1::GifsController do
   describe "GET #index" do

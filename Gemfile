@@ -57,7 +57,7 @@ end
 
 group :test do
   gem 'launchy'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing' # If you are using Rails 5.x
   gem 'shoulda-matchers', '4.0.0.rc1'
     # Adds support for Capybara system testing and selenium driver

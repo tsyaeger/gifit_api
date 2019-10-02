@@ -24,6 +24,10 @@ module Api
 
 			def update
 				@message.update!(message_params)
+				params[:message][:gif_ids].each_with_index do |gif, index|
+					gif_message = @message.gif_messages.find_by(gif_id: gif['id'])
+					gif_message.update(position: index)
+				end
 				json_response(@message) || empty_response
 			end
 
